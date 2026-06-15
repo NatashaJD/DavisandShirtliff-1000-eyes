@@ -46,25 +46,25 @@ function EditableRule({ rule, isAdmin }: { rule: SlaRule; isAdmin: boolean }) {
   });
 
   return (
-    <div className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#0f2444' }}>
+    <div className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#c8dff5' }}>
       <div className="flex-1">
-        <p className="text-[0.83rem]" style={{ color: '#ddeeff' }}>{rule.journeyStage}</p>
-        <p className="text-[0.7rem]" style={{ color: '#4d7ab5' }}>{rule.description}</p>
+        <p className="text-[0.83rem]" style={{ color: '#0a2540' }}>{rule.journeyStage}</p>
+        <p className="text-[0.7rem]" style={{ color: '#5a8fc4' }}>{rule.description}</p>
       </div>
       {editing ? (
         <div className="flex items-center gap-2">
           <input
             type="number" value={hours} onChange={(e) => setHours(e.target.value)} min={1}
             className="w-20 rounded border px-2 py-1 font-mono text-sm focus:outline-none"
-            style={{ background: '#0a1628', borderColor: '#0066CC', color: '#4DA6FF' }}
+            style={{ background: '#f7fbff', borderColor: '#0066CC', color: '#4DA6FF' }}
           />
-          <span className="text-xs" style={{ color: '#4d7ab5' }}>hrs</span>
+          <span className="text-xs" style={{ color: '#5a8fc4' }}>hrs</span>
           <button onClick={() => mutation.mutate()} disabled={mutation.isPending}
             className="rounded px-2 py-1 text-xs font-bold text-white transition disabled:opacity-50"
             style={{ background: 'linear-gradient(135deg, #0066CC, #0055aa)' }}>
             Save
           </button>
-          <button onClick={() => setEditing(false)} className="text-xs" style={{ color: '#4d7ab5' }}>
+          <button onClick={() => setEditing(false)} className="text-xs" style={{ color: '#5a8fc4' }}>
             Cancel
           </button>
         </div>
@@ -75,9 +75,9 @@ function EditableRule({ rule, isAdmin }: { rule: SlaRule; isAdmin: boolean }) {
           </span>
           {isAdmin && (
             <button onClick={() => { setHours(String(rule.thresholdHours)); setEditing(true); }}
-              className="text-xs transition" style={{ color: '#4d7ab5' }}
+              className="text-xs transition" style={{ color: '#5a8fc4' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#4DA6FF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#4d7ab5')}>
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#5a8fc4')}>
               Edit
             </button>
           )}
@@ -88,7 +88,7 @@ function EditableRule({ rule, isAdmin }: { rule: SlaRule; isAdmin: boolean }) {
 }
 
 const selectStyle: React.CSSProperties = {
-  background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff',
+  background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540',
   borderWidth: 1, borderStyle: 'solid', borderRadius: 5,
   padding: '4px 10px', fontSize: 12, outline: 'none',
 };
@@ -123,7 +123,7 @@ export default function SlaPage() {
         <PanelHeader>
           <PanelTitle>SLA Rules</PanelTitle>
           <span className="rounded-full border px-2 py-0.5 text-[0.68rem]"
-            style={{ background: '#0a1628', borderColor: '#1a3560', color: '#4d7ab5' }}>
+            style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#5a8fc4' }}>
             per stage
           </span>
         </PanelHeader>
@@ -155,8 +155,8 @@ export default function SlaPage() {
             <>
               {/* Overall */}
               <div className="flex items-center justify-between rounded border px-4 py-3"
-                style={{ background: '#0a1628', borderColor: '#1a3560' }}>
-                <span className="text-sm font-semibold" style={{ color: '#ddeeff' }}>Overall Compliance</span>
+                style={{ background: '#f7fbff', borderColor: '#c8dff5' }}>
+                <span className="text-sm font-semibold" style={{ color: '#0a2540' }}>Overall Compliance</span>
                 <span className="font-mono text-xl font-bold"
                   style={{ color: compColor(compliance.overallComplianceRate) }}>
                   {(compliance.overallComplianceRate * 100).toFixed(1)}%
@@ -165,12 +165,12 @@ export default function SlaPage() {
 
               {/* By Stage */}
               <div>
-                <p className="mb-2 text-[0.72rem] font-semibold uppercase tracking-wider" style={{ color: '#4d7ab5' }}>By Stage</p>
+                <p className="mb-2 text-[0.72rem] font-semibold uppercase tracking-wider" style={{ color: '#5a8fc4' }}>By Stage</p>
                 <div className="space-y-1.5">
                   {Object.entries(compliance.byStage).map(([stage, rate]) => (
                     <div key={stage} className="flex items-center gap-3">
-                      <span className="w-36 truncate text-xs" style={{ color: '#ddeeff' }}>{stage}</span>
-                      <div className="flex-1 h-1.5 overflow-hidden rounded-full" style={{ background: '#112548' }}>
+                      <span className="w-36 truncate text-xs" style={{ color: '#0a2540' }}>{stage}</span>
+                      <div className="flex-1 h-1.5 overflow-hidden rounded-full" style={{ background: '#e6f0fb' }}>
                         <div className="h-full rounded-full transition-all"
                           style={{ width: `${rate * 100}%`, background: compColor(rate) }} />
                       </div>
@@ -185,12 +185,12 @@ export default function SlaPage() {
 
               {/* By Department */}
               <div>
-                <p className="mb-2 text-[0.72rem] font-semibold uppercase tracking-wider" style={{ color: '#4d7ab5' }}>By Department</p>
+                <p className="mb-2 text-[0.72rem] font-semibold uppercase tracking-wider" style={{ color: '#5a8fc4' }}>By Department</p>
                 <div className="space-y-1.5">
                   {Object.entries(compliance.byDepartment).map(([dept, rate]) => (
                     <div key={dept} className="flex items-center gap-3">
-                      <span className="w-24 truncate text-xs" style={{ color: '#ddeeff' }}>{dept}</span>
-                      <div className="flex-1 h-1.5 overflow-hidden rounded-full" style={{ background: '#112548' }}>
+                      <span className="w-24 truncate text-xs" style={{ color: '#0a2540' }}>{dept}</span>
+                      <div className="flex-1 h-1.5 overflow-hidden rounded-full" style={{ background: '#e6f0fb' }}>
                         <div className="h-full rounded-full transition-all"
                           style={{ width: `${rate * 100}%`, background: compColor(rate) }} />
                       </div>
@@ -203,7 +203,7 @@ export default function SlaPage() {
                 </div>
               </div>
 
-              <p className="text-center text-[0.7rem]" style={{ color: '#4d7ab5' }}>
+              <p className="text-center text-[0.7rem]" style={{ color: '#5a8fc4' }}>
                 {compliance.recordsProcessed} records processed
               </p>
             </>

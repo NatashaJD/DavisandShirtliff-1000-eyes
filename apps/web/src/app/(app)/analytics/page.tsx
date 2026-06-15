@@ -24,10 +24,10 @@ const RANGE_OPTIONS = [
 ];
 
 const tooltipStyle: React.CSSProperties = {
-  backgroundColor: '#0d1f38',
+  backgroundColor: '#ffffff',
   border: '1px solid #1a3560',
   borderRadius: 6,
-  color: '#ddeeff',
+  color: '#0a2540',
   fontSize: 12,
 };
 
@@ -88,15 +88,15 @@ export default function AnalyticsPage() {
     <div className="space-y-4">
       {/* Range selector */}
       <div className="flex items-center gap-2">
-        <span className="text-xs" style={{ color: '#4d7ab5' }}>Range:</span>
+        <span className="text-xs" style={{ color: '#5a8fc4' }}>Range:</span>
         {RANGE_OPTIONS.map((o) => (
           <button key={o.days} onClick={() => setRangeDays(o.days)}
             className="rounded border px-3 py-1 text-xs transition"
             style={rangeDays === o.days
               ? { background: 'rgba(0,102,204,0.2)', borderColor: '#0066CC', color: '#4DA6FF' }
-              : { borderColor: '#1a3560', color: '#7aaad4' }}
+              : { borderColor: '#c8dff5', color: '#2e6fa8' }}
             onMouseEnter={(e) => rangeDays !== o.days && (e.currentTarget.style.borderColor = '#0066CC')}
-            onMouseLeave={(e) => rangeDays !== o.days && (e.currentTarget.style.borderColor = '#1a3560')}>
+            onMouseLeave={(e) => rangeDays !== o.days && (e.currentTarget.style.borderColor = '#c8dff5')}>
             {o.label}
           </button>
         ))}
@@ -126,13 +126,13 @@ export default function AnalyticsPage() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#0f2444" vertical={false} />
-                <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#4d7ab5' }} tickLine={false} axisLine={false}
+                <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#5a8fc4' }} tickLine={false} axisLine={false}
                   tickFormatter={(v: string) => v.slice(5)} interval="preserveStartEnd" />
-                <YAxis yAxisId="vol" tick={{ fontSize: 10, fill: '#4d7ab5' }} tickLine={false} axisLine={false} />
-                <YAxis yAxisId="sla" orientation="right" tick={{ fontSize: 10, fill: '#4d7ab5' }} tickLine={false} axisLine={false}
+                <YAxis yAxisId="vol" tick={{ fontSize: 10, fill: '#5a8fc4' }} tickLine={false} axisLine={false} />
+                <YAxis yAxisId="sla" orientation="right" tick={{ fontSize: 10, fill: '#5a8fc4' }} tickLine={false} axisLine={false}
                   tickFormatter={(v: number) => `${v}%`} domain={[0, 100]} />
                 <Tooltip contentStyle={tooltipStyle} />
-                <Legend wrapperStyle={{ fontSize: 11, color: '#7aaad4' }} />
+                <Legend wrapperStyle={{ fontSize: 11, color: '#2e6fa8' }} />
                 <Area yAxisId="vol" type="monotone" dataKey="volume" name="Requests"
                   stroke="#0066CC" fill="url(#volGrad)" strokeWidth={2} dot={false} />
                 <Area yAxisId="sla" type="monotone" dataKey="sla" name="SLA %"
@@ -153,14 +153,14 @@ export default function AnalyticsPage() {
                 {Array.from({ length: 5 }).map((_, i) => <Skeleton key={i} className="h-10" />)}
               </div>
             ) : (depts ?? []).map((d) => (
-              <div key={d.department} className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#0f2444' }}>
-                <span className="w-24 truncate text-[0.82rem]" style={{ color: '#ddeeff' }}>{d.department}</span>
+              <div key={d.department} className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#c8dff5' }}>
+                <span className="w-24 truncate text-[0.82rem]" style={{ color: '#0a2540' }}>{d.department}</span>
                 <div className="flex-1">
-                  <div className="mb-1 flex items-center justify-between text-xs" style={{ color: '#4d7ab5' }}>
+                  <div className="mb-1 flex items-center justify-between text-xs" style={{ color: '#5a8fc4' }}>
                     <span>SLA {(d.slaComplianceRate * 100).toFixed(0)}%</span>
                     <span>Bottlenecks: {d.bottleneckFrequency}</span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full" style={{ background: '#112548' }}>
+                  <div className="h-1.5 overflow-hidden rounded-full" style={{ background: '#e6f0fb' }}>
                     <div className="h-full rounded-full transition-all"
                       style={{ width: `${d.slaComplianceRate * 100}%`, background: compColor(d.slaComplianceRate) }} />
                   </div>
@@ -180,10 +180,10 @@ export default function AnalyticsPage() {
             {(reportsRes?.data ?? []).length === 0 ? (
               <EmptyState title="No reports" />
             ) : (reportsRes?.data ?? []).map((r) => (
-              <div key={r.id} className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#0f2444' }}>
+              <div key={r.id} className="flex items-center gap-3 border-b py-3 last:border-0" style={{ borderColor: '#c8dff5' }}>
                 <div className="flex-1">
-                  <p className="text-[0.8rem]" style={{ color: '#ddeeff' }}>{r.kpiKey.replace(/_/g, ' ')}</p>
-                  <p className="text-[0.7rem]" style={{ color: '#4d7ab5' }}>
+                  <p className="text-[0.8rem]" style={{ color: '#0a2540' }}>{r.kpiKey.replace(/_/g, ' ')}</p>
+                  <p className="text-[0.7rem]" style={{ color: '#5a8fc4' }}>
                     {r.snapshotType} · {fmtDateShort(r.periodStart)}
                   </p>
                 </div>

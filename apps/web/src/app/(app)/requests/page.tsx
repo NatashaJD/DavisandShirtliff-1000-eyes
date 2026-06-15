@@ -21,7 +21,7 @@ const STAGES: RequestStage[] = [
 ];
 
 const selectStyle: React.CSSProperties = {
-  background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff',
+  background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540',
   borderWidth: 1, borderStyle: 'solid', borderRadius: 5,
   padding: '7px 12px', fontSize: 13, outline: 'none',
 };
@@ -70,7 +70,7 @@ export default function RequestsPage() {
         <div className="flex flex-wrap items-center gap-2">
           {/* Search */}
           <div className="relative">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#4d7ab5' }} />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#5a8fc4' }} />
             <input
               type="search" value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -78,7 +78,7 @@ export default function RequestsPage() {
               className="rounded border py-2 pl-8 pr-3 text-sm focus:outline-none"
               style={selectStyle}
               onFocus={(e) => { e.target.style.borderColor = '#0066CC'; e.target.style.boxShadow = '0 0 0 2px rgba(0,102,204,0.12)'; }}
-              onBlur={(e) => { e.target.style.borderColor = '#1a3560'; e.target.style.boxShadow = 'none'; }}
+              onBlur={(e) => { e.target.style.borderColor = '#c8dff5'; e.target.style.boxShadow = 'none'; }}
             />
           </div>
           {/* Stage filter */}
@@ -106,10 +106,10 @@ export default function RequestsPage() {
             <span className="font-mono text-sm font-semibold" style={{ color: '#4DA6FF' }}>{r.requestNumber}</span>
           )},
           { key: 'customer', header: 'Customer', render: (r) => (
-            <span style={{ color: '#ddeeff' }}>{r.customerName}</span>
+            <span style={{ color: '#0a2540' }}>{r.customerName}</span>
           )},
           { key: 'type', header: 'Type', className: 'hidden md:table-cell', render: (r) => (
-            <span style={{ color: '#7aaad4' }}>{r.requestType}</span>
+            <span style={{ color: '#2e6fa8' }}>{r.requestType}</span>
           )},
           { key: 'stage', header: 'Stage', render: (r) => (
             <Badge variant={stageBadgeVariant(r.currentStage)}>{r.currentStage}</Badge>
@@ -125,16 +125,16 @@ export default function RequestsPage() {
               : <span className="text-xs font-semibold" style={{ color: '#00cc7a' }}>On Track</span>
           )},
           { key: 'dept', header: 'Dept', className: 'hidden lg:table-cell', render: (r) => (
-            <span style={{ color: '#7aaad4' }}>{r.assignedDepartment ?? '—'}</span>
+            <span style={{ color: '#2e6fa8' }}>{r.assignedDepartment ?? '—'}</span>
           )},
           { key: 'created', header: 'Created', className: 'hidden xl:table-cell', render: (r) => (
-            <span className="font-mono text-xs" style={{ color: '#4d7ab5' }}>{fmtDate(r.createdAt)}</span>
+            <span className="font-mono text-xs" style={{ color: '#5a8fc4' }}>{fmtDate(r.createdAt)}</span>
           )},
           { key: 'action', header: '', render: (r) => (
             <button onClick={(e) => { e.stopPropagation(); setSelected(r); }}
-              style={{ color: '#4d7ab5' }}
+              style={{ color: '#5a8fc4' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#4DA6FF')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#4d7ab5')}>
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#5a8fc4')}>
               <ExternalLink size={14} />
             </button>
           )},

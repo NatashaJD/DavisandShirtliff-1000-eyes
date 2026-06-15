@@ -38,13 +38,13 @@ function DataGrid({ rows }: { rows: Record<string, unknown>[] }) {
   if (!rows.length) return null;
   const keys = Object.keys(rows[0] ?? {}).slice(0, 6);
   return (
-    <div className="mt-3 overflow-x-auto rounded border" style={{ borderColor: '#0f2444' }}>
+    <div className="mt-3 overflow-x-auto rounded border" style={{ borderColor: '#c8dff5' }}>
       <table className="w-full border-collapse text-xs">
         <thead>
           <tr>
             {keys.map((k) => (
               <th key={k} className="border-b px-3 py-2 text-left font-semibold uppercase tracking-wider"
-                style={{ background: '#0a1628', borderColor: '#0f2444', color: '#4d7ab5' }}>
+                style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#5a8fc4' }}>
                 {k.replace(/([A-Z])/g, ' $1').trim()}
               </th>
             ))}
@@ -52,9 +52,9 @@ function DataGrid({ rows }: { rows: Record<string, unknown>[] }) {
         </thead>
         <tbody>
           {rows.slice(0, 8).map((row, i) => (
-            <tr key={i} className="border-b last:border-0" style={{ borderColor: '#0f2444' }}>
+            <tr key={i} className="border-b last:border-0" style={{ borderColor: '#c8dff5' }}>
               {keys.map((k) => (
-                <td key={k} className="px-3 py-2" style={{ color: '#ddeeff' }}>
+                <td key={k} className="px-3 py-2" style={{ color: '#0a2540' }}>
                   {String(row[k] ?? '—')}
                 </td>
               ))}
@@ -70,11 +70,11 @@ function AssistantBubble({ msg, typing }: { msg?: Message; typing?: boolean }) {
   return (
     <div className="flex gap-3">
       <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border text-[0.65rem] font-bold"
-        style={{ background: 'rgba(0,102,204,0.15)', borderColor: 'rgba(0,102,204,0.4)', color: '#4DA6FF' }}>
+        style={{ background: 'rgba(0,102,204,0.10)', borderColor: 'rgba(0,102,204,0.4)', color: '#4DA6FF' }}>
         AI
       </div>
       <div className="max-w-[80%] rounded border px-4 py-3 text-[0.85rem] leading-relaxed"
-        style={{ background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff' }}>
+        style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540' }}>
         {typing ? <TypingDots /> : (
           <>
             <p>{msg?.content}</p>
@@ -83,11 +83,11 @@ function AssistantBubble({ msg, typing }: { msg?: Message; typing?: boolean }) {
             )}
             {msg?.query && (
               <details className="mt-2">
-                <summary className="cursor-pointer text-[0.7rem]" style={{ color: '#4d7ab5' }}>
+                <summary className="cursor-pointer text-[0.7rem]" style={{ color: '#5a8fc4' }}>
                   View source query
                 </summary>
                 <pre className="mt-1 overflow-x-auto rounded p-2 font-mono text-[0.7rem]"
-                  style={{ background: '#050d1a', color: '#4DA6FF' }}>
+                  style={{ background: '#f0f6ff', color: '#4DA6FF' }}>
                   {msg.query}
                 </pre>
               </details>
@@ -103,11 +103,11 @@ function UserBubble({ content }: { content: string }) {
   return (
     <div className="flex flex-row-reverse gap-3">
       <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border text-[0.65rem] font-bold"
-        style={{ background: '#0a1628', borderColor: '#1a3560', color: '#7aaad4' }}>
+        style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#2e6fa8' }}>
         You
       </div>
       <div className="max-w-[80%] rounded border px-4 py-3 text-[0.85rem]"
-        style={{ background: 'rgba(0,102,204,0.12)', borderColor: 'rgba(0,102,204,0.3)', color: '#ddeeff' }}>
+        style={{ background: 'rgba(0,102,204,0.08)', borderColor: 'rgba(0,102,204,0.3)', color: '#0a2540' }}>
         {content}
       </div>
     </div>
@@ -171,21 +171,21 @@ export default function AiPage() {
 
   return (
     <div className="flex flex-col overflow-hidden rounded-lg border"
-      style={{ background: '#0d1f38', borderColor: '#0f2444', height: 'calc(100vh - 120px)' }}>
+      style={{ background: '#ffffff', borderColor: '#c8dff5', height: 'calc(100vh - 120px)' }}>
 
       {/* Header */}
       <div className="flex flex-shrink-0 items-center gap-3 border-b px-5 py-4"
-        style={{ background: '#0a1628', borderColor: '#0f2444' }}>
+        style={{ background: '#f7fbff', borderColor: '#c8dff5' }}>
         {/* D&S water drop icon */}
         <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border"
-          style={{ background: 'rgba(0,102,204,0.15)', borderColor: 'rgba(0,102,204,0.4)', boxShadow: '0 0 16px rgba(0,102,204,0.15)' }}>
+          style={{ background: 'rgba(0,102,204,0.10)', borderColor: 'rgba(0,102,204,0.4)', boxShadow: '0 0 16px rgba(0,102,204,0.15)' }}>
           <BrainCircuit size={22} style={{ color: '#4DA6FF' }} />
         </div>
         <div>
           <div className="text-[0.95rem] font-bold" style={{ color: '#ffffff' }}>
             D&amp;S Operational Copilot
           </div>
-          <div className="text-xs" style={{ color: '#4d7ab5' }}>
+          <div className="text-xs" style={{ color: '#5a8fc4' }}>
             Ask anything about your operations in plain language
           </div>
         </div>
@@ -208,9 +208,9 @@ export default function AiPage() {
             {SUGGESTIONS.map((s) => (
               <button key={s} onClick={() => send(s)}
                 className="rounded-full border px-3 py-1.5 text-xs transition"
-                style={{ background: '#0a1628', borderColor: '#1a3560', color: '#4DA6FF' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#0066CC'; e.currentTarget.style.background = 'rgba(0,102,204,0.12)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a3560'; e.currentTarget.style.background = '#0a1628'; }}>
+                style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#4DA6FF' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#0066CC'; e.currentTarget.style.background = 'rgba(0,102,204,0.08)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#c8dff5'; e.currentTarget.style.background = '#f7fbff'; }}>
                 {s}
               </button>
             ))}
@@ -222,15 +222,15 @@ export default function AiPage() {
       {/* Input */}
       <form onSubmit={(e) => { e.preventDefault(); send(input); }}
         className="flex flex-shrink-0 gap-2 border-t p-4"
-        style={{ borderColor: '#0f2444' }}>
+        style={{ borderColor: '#c8dff5' }}>
         <input
           value={input} onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about operations, delays, SLA compliance…"
           disabled={mutation.isPending}
           className="flex-1 rounded border px-4 py-2.5 text-sm focus:outline-none transition"
-          style={{ background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff' }}
+          style={{ background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540' }}
           onFocus={(e) => { e.target.style.borderColor = '#0066CC'; e.target.style.boxShadow = '0 0 0 2px rgba(0,102,204,0.12)'; }}
-          onBlur={(e) => { e.target.style.borderColor = '#1a3560'; e.target.style.boxShadow = 'none'; }}
+          onBlur={(e) => { e.target.style.borderColor = '#c8dff5'; e.target.style.boxShadow = 'none'; }}
         />
         <button type="submit" disabled={!input.trim() || mutation.isPending}
           className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded text-white transition disabled:cursor-not-allowed disabled:opacity-40"

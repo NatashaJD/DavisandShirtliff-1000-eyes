@@ -42,9 +42,9 @@ export function RequestDrawer({ request: r, onClose }: Props) {
 
       {/* Drawer */}
       <aside className="fixed right-0 top-0 z-50 flex h-screen w-full max-w-xl flex-col border-l shadow-xl"
-        style={{ background: '#0d1f38', borderColor: '#0f2444' }}>
+        style={{ background: '#ffffff', borderColor: '#c8dff5' }}>
         {/* Header */}
-        <div className="flex flex-shrink-0 items-center justify-between border-b px-5 py-4" style={{ borderColor: '#0f2444' }}>
+        <div className="flex flex-shrink-0 items-center justify-between border-b px-5 py-4" style={{ borderColor: '#c8dff5' }}>
           <div>
             <p className="font-mono text-sm font-semibold" style={{ color: '#4DA6FF' }}>{r.requestNumber}</p>
             <p className="text-xs text-text-muted">{r.customerName}</p>

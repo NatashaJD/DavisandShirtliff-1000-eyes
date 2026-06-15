@@ -19,7 +19,7 @@ const NEXT_ACTION: Partial<Record<AlertLifecycle, { label: string; action: 'ackn
 };
 
 const selectStyle: React.CSSProperties = {
-  background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff',
+  background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540',
   borderWidth: 1, borderStyle: 'solid', borderRadius: 5,
   padding: '7px 12px', fontSize: 13, outline: 'none',
 };
@@ -66,7 +66,7 @@ export default function AlertsPage() {
           {(['Created','Acknowledged','Resolved','Archived'] as AlertLifecycle[]).map((s) => <option key={s}>{s}</option>)}
         </select>
         {data?.meta && (
-          <span className="ml-auto font-mono text-xs" style={{ color: '#4d7ab5' }}>
+          <span className="ml-auto font-mono text-xs" style={{ color: '#5a8fc4' }}>
             {data.meta.total} alerts
           </span>
         )}
@@ -76,29 +76,29 @@ export default function AlertsPage() {
         columns={[
           { key: 'sev', header: 'Severity', render: (a) => <Badge variant={severityVariant(a.severity)}>{a.severity}</Badge> },
           { key: 'type', header: 'Type', className: 'hidden md:table-cell', render: (a) => (
-            <span className="text-xs" style={{ color: '#7aaad4' }}>{a.alertType}</span>
+            <span className="text-xs" style={{ color: '#2e6fa8' }}>{a.alertType}</span>
           )},
           { key: 'msg', header: 'Message', render: (a) => (
-            <span className="line-clamp-2 text-[0.82rem]" style={{ color: '#ddeeff' }}>{a.message}</span>
+            <span className="line-clamp-2 text-[0.82rem]" style={{ color: '#0a2540' }}>{a.message}</span>
           )},
           { key: 'state', header: 'State', render: (a) => <Badge variant={lifecycleVariant(a.lifecycleState)}>{a.lifecycleState}</Badge> },
           { key: 'req', header: 'Request', className: 'hidden lg:table-cell', render: (a) => (
             <span className="font-mono text-xs" style={{ color: '#4DA6FF' }}>{a.requestId}</span>
           )},
           { key: 'time', header: 'Created', className: 'hidden xl:table-cell', render: (a) => (
-            <span className="font-mono text-xs" style={{ color: '#4d7ab5' }}>{fmtDate(a.createdAt)}</span>
+            <span className="font-mono text-xs" style={{ color: '#5a8fc4' }}>{fmtDate(a.createdAt)}</span>
           )},
           { key: 'action', header: 'Action', render: (a) => {
             const next = NEXT_ACTION[a.lifecycleState];
-            if (!next) return <span className="text-xs" style={{ color: '#4d7ab5' }}>—</span>;
+            if (!next) return <span className="text-xs" style={{ color: '#5a8fc4' }}>—</span>;
             return (
               <button
                 onClick={(e) => { e.stopPropagation(); actionMutation.mutate({ id: a.id, action: next.action }); }}
                 disabled={actionMutation.isPending}
                 className="rounded border px-2.5 py-1 text-xs transition disabled:opacity-40"
-                style={{ borderColor: '#1a3560', color: '#7aaad4' }}
+                style={{ borderColor: '#c8dff5', color: '#2e6fa8' }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#0066CC'; e.currentTarget.style.color = '#4DA6FF'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#1a3560'; e.currentTarget.style.color = '#7aaad4'; }}>
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#c8dff5'; e.currentTarget.style.color = '#2e6fa8'; }}>
                 {next.label}
               </button>
             );

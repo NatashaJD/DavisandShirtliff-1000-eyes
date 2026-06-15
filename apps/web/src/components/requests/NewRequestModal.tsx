@@ -15,7 +15,7 @@ interface Props {
 }
 
 const fieldStyle: React.CSSProperties = {
-  background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff', width: '100%',
+  background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540', width: '100%',
 };
 
 export function NewRequestModal({ onClose, onSubmit, loading }: Props) {
@@ -41,31 +41,31 @@ export function NewRequestModal({ onClose, onSubmit, loading }: Props) {
   }
 
   const baseCls = 'rounded border px-3 py-2 text-sm focus:outline-none transition';
-  const labelStyle: React.CSSProperties = { color: '#7aaad4' };
+  const labelStyle: React.CSSProperties = { color: '#2e6fa8' };
 
   function focusHandler(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
     e.target.style.borderColor = '#0066CC';
     e.target.style.boxShadow = '0 0 0 2px rgba(0,102,204,0.15)';
   }
   function blurHandler(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
-    e.target.style.borderColor = '#1a3560';
+    e.target.style.borderColor = '#c8dff5';
     e.target.style.boxShadow = 'none';
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)' }}>
+      style={{ background: 'rgba(0,51,128,0.35)', backdropFilter: 'blur(4px)' }}>
       <div className="w-full max-w-md rounded-lg border shadow-xl"
-        style={{ background: '#0d1f38', borderColor: '#1a3560' }}>
+        style={{ background: '#ffffff', borderColor: '#c8dff5' }}>
 
         {/* Header */}
         <div className="flex items-center justify-between border-b px-5 py-4"
-          style={{ borderColor: '#0f2444' }}>
+          style={{ borderColor: '#c8dff5' }}>
           <h2 className="text-sm font-semibold text-white">New Service Request</h2>
           <button onClick={onClose} className="rounded p-1 transition"
-            style={{ color: '#4d7ab5' }}
+            style={{ color: '#5a8fc4' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#4d7ab5')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#5a8fc4')}
             aria-label="Close">
             <X size={16} />
           </button>
@@ -132,8 +132,8 @@ export function NewRequestModal({ onClose, onSubmit, loading }: Props) {
           <div className="flex justify-end gap-2 pt-1">
             <button type="button" onClick={onClose}
               className="rounded border px-4 py-2 text-xs transition"
-              style={{ borderColor: '#1a3560', color: '#7aaad4' }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#112548')}
+              style={{ borderColor: '#c8dff5', color: '#2e6fa8' }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#e6f0fb')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
               Cancel
             </button>

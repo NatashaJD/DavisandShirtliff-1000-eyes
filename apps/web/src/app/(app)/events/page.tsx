@@ -13,7 +13,7 @@ const PAGE_SIZE = 20;
 const EVENT_TYPES = ['stage_change','status_update','sla_warning','assignment_changed','note_added','document_uploaded'];
 
 const selectStyle: React.CSSProperties = {
-  background: '#0a1628', borderColor: '#1a3560', color: '#ddeeff',
+  background: '#f7fbff', borderColor: '#c8dff5', color: '#0a2540',
   borderWidth: 1, borderStyle: 'solid', borderRadius: 5,
   padding: '7px 12px', fontSize: 13, outline: 'none',
 };
@@ -36,13 +36,13 @@ export default function EventsPage() {
   });
 
   const pipelineColor = (s: string) =>
-    s === 'complete' ? '#00cc7a' : s === 'partial' ? '#ffaa00' : '#4d7ab5';
+    s === 'complete' ? '#00cc7a' : s === 'partial' ? '#ffaa00' : '#5a8fc4';
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-2">
         <div className="relative">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#4d7ab5' }} />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#5a8fc4' }} />
           <input
             value={requestId}
             onChange={(e) => { setRequestId(e.target.value); setPage(1); }}
@@ -50,7 +50,7 @@ export default function EventsPage() {
             className="rounded border py-2 pl-8 pr-3 text-sm focus:outline-none"
             style={selectStyle}
             onFocus={(e) => { e.target.style.borderColor = '#0066CC'; }}
-            onBlur={(e) => { e.target.style.borderColor = '#1a3560'; }}
+            onBlur={(e) => { e.target.style.borderColor = '#c8dff5'; }}
           />
         </div>
         <select value={eventType} onChange={(e) => { setEventType(e.target.value); setPage(1); }} style={selectStyle}>
@@ -58,7 +58,7 @@ export default function EventsPage() {
           {EVENT_TYPES.map((t) => <option key={t} value={t}>{t.replace(/_/g,' ')}</option>)}
         </select>
         {data?.meta && (
-          <span className="ml-auto font-mono text-xs" style={{ color: '#4d7ab5' }}>
+          <span className="ml-auto font-mono text-xs" style={{ color: '#5a8fc4' }}>
             {data.meta.total} events
           </span>
         )}
@@ -67,7 +67,7 @@ export default function EventsPage() {
       <DataTable
         columns={[
           { key: 'type', header: 'Event Type', render: (e) => (
-            <span className="font-medium capitalize" style={{ color: '#ddeeff' }}>
+            <span className="font-medium capitalize" style={{ color: '#0a2540' }}>
               {e.eventType.replace(/_/g,' ')}
             </span>
           )},
@@ -75,10 +75,10 @@ export default function EventsPage() {
             <span className="font-mono text-xs" style={{ color: '#4DA6FF' }}>{e.requestId}</span>
           )},
           { key: 'dept', header: 'Department', className: 'hidden md:table-cell', render: (e) => (
-            <span style={{ color: '#7aaad4' }}>{e.department}</span>
+            <span style={{ color: '#2e6fa8' }}>{e.department}</span>
           )},
           { key: 'src', header: 'Source', className: 'hidden lg:table-cell', render: (e) => (
-            <span style={{ color: '#4d7ab5' }}>{e.sourceSystem}</span>
+            <span style={{ color: '#5a8fc4' }}>{e.sourceSystem}</span>
           )},
           { key: 'pipeline', header: 'Pipeline', render: (e) => (
             <span className="text-xs font-semibold" style={{ color: pipelineColor(e.pipelineStatus) }}>
@@ -86,7 +86,7 @@ export default function EventsPage() {
             </span>
           )},
           { key: 'time', header: 'Occurred At', render: (e) => (
-            <span className="font-mono text-xs" style={{ color: '#4d7ab5' }}>{fmtDate(e.occurredAt)}</span>
+            <span className="font-mono text-xs" style={{ color: '#5a8fc4' }}>{fmtDate(e.occurredAt)}</span>
           )},
         ]}
         rows={data?.data ?? []}

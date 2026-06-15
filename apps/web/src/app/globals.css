@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Davis & Shirtliff Brand Design System ───────────────── */
+/* ── Davis & Shirtliff Light Theme ───────────────────────── */
 :root {
   /* Brand blues */
   --ds-blue:        #0066CC;
@@ -10,43 +10,42 @@
   --ds-blue-dark:   #003380;
   --ds-blue-deeper: #002266;
 
-  /* Dark navy command-centre backgrounds */
-  --bg:           #050d1a;
-  --bg-raised:    #0a1628;
-  --bg-panel:     #0d1f38;
-  --bg-hover:     #112548;
+  /* Light backgrounds */
+  --bg:           #f0f6ff;
+  --bg-raised:    #e6f0fb;
+  --bg-panel:     #ffffff;
+  --bg-hover:     #dceefa;
 
-  /* Borders — blue-tinted */
-  --border:       #0f2444;
-  --border-light: #1a3560;
+  /* Borders */
+  --border:       #c8dff5;
+  --border-light: #b0d0f0;
 
-  /* Text */
-  --muted:        #1e4080;
-  --subtle:       #4d7ab5;
-  --secondary:    #7aaad4;
-  --text:         #ddeeff;
+  /* Text — dark navy, NOT black */
+  --muted:        #c8dff5;
+  --subtle:       #5a8fc4;
+  --secondary:    #2e6fa8;
+  --text:         #0a2540;
   --white:        #ffffff;
 
-  /* Primary accent — D&S blue */
+  /* Primary accent */
   --cyan:         #0066CC;
   --cyan-dim:     #0055aa;
   --cyan-faint:   rgba(0, 102, 204, 0.10);
-  --cyan-glow:    rgba(0, 102, 204, 0.22);
+  --cyan-glow:    rgba(0, 102, 204, 0.20);
 
-  /* Light blue highlight */
   --blue-light:   #4DA6FF;
 
   /* Semantic */
-  --success:      #00cc7a;
-  --warning:      #ffaa00;
-  --danger:       #ff3355;
+  --success:      #007a4d;
+  --warning:      #b35c00;
+  --danger:       #cc0033;
 }
 
 /* ── Base ─────────────────────────────────────────────────── */
 html {
   font-size: 14px;
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -57,30 +56,22 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* D&S subtle blue-radial background */
-  background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,102,204,0.08) 0%, transparent 60%);
+  background-image: radial-gradient(ellipse 80% 40% at 50% -10%, rgba(0,102,204,0.06) 0%, transparent 60%);
 }
 
 /* ── Scrollbars ──────────────────────────────────────────── */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3a3a50 transparent;
+  scrollbar-color: #c8dff5 transparent;
 }
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: #3a3a50;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover { background: #6b6b85; }
+::-webkit-scrollbar-thumb { background: #c8dff5; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5a8fc4; }
 
 /* ── Focus ring ──────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid #0066CC;
   outline-offset: 2px;
 }
 
@@ -89,16 +80,11 @@ body {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes shimmerBg {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
+@keyframes spin { to { transform: rotate(360deg); } }
 @keyframes bounce {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
   40% { transform: translateY(-5px); opacity: 1; }
