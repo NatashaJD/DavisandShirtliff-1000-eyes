@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { X } from 'lucide-react';
-import { type ServiceRequest } from '@/lib/api';
+import { type ServiceRequest, type Priority } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 
 const REQUEST_TYPES = ['Borehole Design','Solar Installation','Pump Maintenance','Water Treatment','Site Survey'];
@@ -23,7 +23,7 @@ export function NewRequestModal({ onClose, onSubmit, loading }: Props) {
   const [customerContact, setCustomerContact] = useState('');
   const [requestType, setRequestType] = useState('');
   const [department, setDepartment] = useState('');
-  const [priority, setPriority] = useState('Medium');
+  const [priority, setPriority] = useState<Priority>('Medium');
   const [error, setError] = useState('');
 
   function handleSubmit(e: FormEvent) {
@@ -117,7 +117,7 @@ export function NewRequestModal({ onClose, onSubmit, loading }: Props) {
 
             <div>
               <label className="mb-1 block text-xs font-medium" style={labelStyle}>Priority</label>
-              <select value={priority} onChange={(e) => setPriority(e.target.value)}
+              <select value={priority} onChange={(e) => setPriority(e.target.value as Priority)}
                 className={baseCls} style={fieldStyle}
                 onFocus={focusHandler} onBlur={blurHandler}>
                 <option>Low</option>
