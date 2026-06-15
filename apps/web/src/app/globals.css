@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Davis & Shirtliff Brand Design System ───────────────── */
+:root {
+  /* Brand blues */
+  --ds-blue:        #0066CC;
+  --ds-blue-light:  #4DA6FF;
+  --ds-blue-dark:   #003380;
+  --ds-blue-deeper: #002266;
+
+  /* Dark navy command-centre backgrounds */
+  --bg:           #050d1a;
+  --bg-raised:    #0a1628;
+  --bg-panel:     #0d1f38;
+  --bg-hover:     #112548;
+
+  /* Borders — blue-tinted */
+  --border:       #0f2444;
+  --border-light: #1a3560;
+
+  /* Text */
+  --muted:        #1e4080;
+  --subtle:       #4d7ab5;
+  --secondary:    #7aaad4;
+  --text:         #ddeeff;
+  --white:        #ffffff;
+
+  /* Primary accent — D&S blue */
+  --cyan:         #0066CC;
+  --cyan-dim:     #0055aa;
+  --cyan-faint:   rgba(0, 102, 204, 0.10);
+  --cyan-glow:    rgba(0, 102, 204, 0.22);
+
+  /* Light blue highlight */
+  --blue-light:   #4DA6FF;
+
+  /* Semantic */
+  --success:      #00cc7a;
+  --warning:      #ffaa00;
+  --danger:       #ff3355;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* D&S subtle blue-radial background */
+  background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,102,204,0.08) 0%, transparent 60%);
+}
+
+/* ── Scrollbars ──────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a50 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #3a3a50;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: #6b6b85; }
+
+/* ── Focus ring ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmerBg {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-5px); opacity: 1; }
+}
+
+.animate-fade-slide-up { animation: fadeSlideUp 0.4s ease; }
+.animate-spin-slow     { animation: spin 0.8s linear infinite; }

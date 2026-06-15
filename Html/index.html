@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dayliff 1000 Eyes</title>
+  <link rel="stylesheet" href="/Css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ── Login Screen ─────────────────────────────────────────────────────── -->
+  <div id="login-screen" class="screen active">
+    <div class="login-bg">
+      <div class="login-grid"></div>
+    </div>
+    <div class="login-container">
+      <div class="login-brand">
+        <div class="brand-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" stroke="var(--cyan)" stroke-width="2"/>
+            <circle cx="24" cy="24" r="8" fill="var(--cyan)" opacity="0.15"/>
+            <circle cx="24" cy="24" r="3" fill="var(--cyan)"/>
+            <line x1="24" y1="2" x2="24" y2="10" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="24" y1="38" x2="24" y2="46" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="2" y1="24" x2="10" y2="24" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="38" y1="24" x2="46" y2="24" stroke="var(--cyan)" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="14" stroke="var(--cyan)" stroke-width="1" stroke-dasharray="3 4" opacity="0.4"/>
+          </svg>
+        </div>
+        <h1 class="brand-name">1000 Eyes</h1>
+        <p class="brand-sub">Enterprise Process Observability Platform</p>
+      </div>
+
+      <form id="login-form" class="login-form" autocomplete="off" novalidate>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <input type="email" id="email" name="email" placeholder="user@dayliff.com" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="pwd-toggle" id="pwd-toggle" aria-label="Toggle password visibility">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="login-error" class="form-error" role="alert" aria-live="polite"></div>
+
+        <button type="submit" id="login-btn" class="btn btn-primary btn-full">
+          <span class="btn-text">Sign In</span>
+          <span class="btn-spinner" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </span>
+        </button>
+
+        <p class="login-demo-hint">Demo: <code>admin@dayliff.com</code> / <code>admin123</code></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Main App Shell ────────────────────────────────────────────────────── -->
+  <div id="app-screen" class="screen">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar" role="navigation" aria-label="Main navigation">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" stroke="var(--cyan)" stroke-width="2"/>
+            <circle cx="24" cy="24" r="3" fill="var(--cyan)"/>
+            <circle cx="24" cy="24" r="14" stroke="var(--cyan)" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+            <line x1="24" y1="2" x2="24" y2="10" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="24" y1="38" x2="24" y2="46" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="2" y1="24" x2="10" y2="24" stroke="var(--cyan)" stroke-width="1.5"/>
+            <line x1="38" y1="24" x2="46" y2="24" stroke="var(--cyan)" stroke-width="1.5"/>
+          </svg>
+          <span class="sidebar-brand-text">1000 Eyes</span>
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-section-label">Overview</span>
+          <a href="#" class="nav-item active" data-view="dashboard" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Dashboard</span>
+          </a>
+          <a href="#" class="nav-item" data-view="requests" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Service Requests</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-label">Operations</span>
+          <a href="#" class="nav-item" data-view="events" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Events</span>
+          </a>
+          <a href="#" class="nav-item" data-view="timeline" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Timeline</span>
+          </a>
+          <a href="#" class="nav-item" data-view="alerts" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span>Alerts</span>
+            <span id="alert-badge" class="nav-badge" hidden>0</span>
+          </a>
+          <a href="#" class="nav-item" data-view="sla" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>SLA Monitor</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-label">Intelligence</span>
+          <a href="#" class="nav-item" data-view="analytics" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Analytics</span>
+          </a>
+          <a href="#" class="nav-item" data-view="ai" role="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+            <span>AI Copilot</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div id="ws-status" class="ws-indicator" title="WebSocket status">
+          <span class="ws-dot"></span>
+          <span class="ws-label">Connecting…</span>
+        </div>
+        <div class="user-chip">
+          <div class="user-avatar" id="user-avatar-sidebar">A</div>
+          <div class="user-info">
+            <span class="user-name" id="user-name-sidebar">Loading…</span>
+            <span class="user-role" id="user-role-sidebar">—</span>
+          </div>
+          <button id="logout-btn" class="btn-icon" title="Logout" aria-label="Logout">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <button id="mobile-menu-btn" aria-label="Open navigation menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <h2 id="page-title" class="page-title">Dashboard</h2>
+          <span id="page-subtitle" class="page-subtitle"></span>
+        </div>
+        <div class="top-bar-right">
+          <div id="stale-indicator" class="stale-banner" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Data may be stale
+          </div>
+          <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Refresh current view">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Refresh
+          </button>
+        </div>
+      </header>
+
+      <!-- Views -->
+      <div id="view-container" class="view-container">
+
+        <!-- Dashboard View -->
+        <div id="view-dashboard" class="view active">
+          <div class="kpi-grid" id="kpi-grid">
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+            <div class="kpi-card skeleton"><div class="kpi-skeleton-inner"></div></div>
+          </div>
+
+          <div class="dashboard-bottom">
+            <div class="panel" id="bottlenecks-panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Top Bottlenecks</h3>
+                <span class="panel-badge">by excess SLA time</span>
+              </div>
+              <div class="panel-body" id="bottlenecks-list">
+                <div class="empty-state">Loading…</div>
+              </div>
+            </div>
+
+            <div class="panel" id="recent-alerts-panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Recent Alerts</h3>
+                <a href="#" class="panel-link" data-view="alerts">View all →</a>
+              </div>
+              <div class="panel-body" id="recent-alerts-list">
+                <div class="empty-state">Loading…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Requests View -->
+        <div id="view-requests" class="view">
+          <div class="view-toolbar">
+            <div class="toolbar-left">
+              <input type="search" id="req-search" class="search-input" placeholder="Search requests…" />
+            </div>
+            <div class="toolbar-right">
+              <button class="btn btn-primary btn-sm" id="new-request-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New Request
+              </button>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="requests-table">
+              <thead>
+                <tr>
+                  <th>Request #</th>
+                  <th>Customer</th>
+                  <th>Type</th>
+                  <th>Stage</th>
+                  <th>Status</th>
+                  <th>SLA</th>
+                  <th>Created</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="requests-tbody">
+                <tr><td colspan="8" class="table-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination" id="requests-pagination"></div>
+        </div>
+
+        <!-- Events View -->
+        <div id="view-events" class="view">
+          <div class="view-toolbar">
+            <div class="toolbar-left">
+              <input type="search" id="evt-search" class="search-input" placeholder="Filter by request ID…" />
+              <select id="evt-type-filter" class="select-input">
+                <option value="">All event types</option>
+                <option value="stage_change">Stage Change</option>
+                <option value="status_update">Status Update</option>
+                <option value="sla_breach">SLA Breach</option>
+              </select>
+            </div>
+            <div class="toolbar-right">
+              <span id="evt-count" class="count-badge">— events</span>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="events-table">
+              <thead>
+                <tr>
+                  <th>Event Type</th>
+                  <th>Request ID</th>
+                  <th>Department</th>
+                  <th>Source</th>
+                  <th>Pipeline</th>
+                  <th>Occurred At</th>
+                </tr>
+              </thead>
+              <tbody id="events-tbody">
+                <tr><td colspan="6" class="table-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination" id="events-pagination"></div>
+        </div>
+
+        <!-- Timeline View -->
+        <div id="view-timeline" class="view">
+          <div class="view-toolbar">
+            <div class="toolbar-left">
+              <label for="timeline-req-id" class="sr-only">Request ID</label>
+              <input type="text" id="timeline-req-id" class="search-input" placeholder="Enter Request ID or Number…" style="min-width:280px" />
+              <button class="btn btn-primary btn-sm" id="load-timeline-btn">Load Timeline</button>
+            </div>
+          </div>
+          <div id="timeline-container" class="timeline-container">
+            <div class="empty-state">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <p>Enter a Request ID to view its journey timeline</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerts View -->
+        <div id="view-alerts" class="view">
+          <div class="view-toolbar">
+            <div class="toolbar-left">
+              <select id="alert-severity-filter" class="select-input">
+                <option value="">All severities</option>
+                <option value="Critical">Critical</option>
+                <option value="Warning">Warning</option>
+                <option value="Info">Info</option>
+              </select>
+              <select id="alert-state-filter" class="select-input">
+                <option value="">All states</option>
+                <option value="Created">Created</option>
+                <option value="Acknowledged">Acknowledged</option>
+                <option value="Resolved">Resolved</option>
+                <option value="Archived">Archived</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="alerts-table">
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>Type</th>
+                  <th>Message</th>
+                  <th>State</th>
+                  <th>Request</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="alerts-tbody">
+                <tr><td colspan="7" class="table-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination" id="alerts-pagination"></div>
+        </div>
+
+        <!-- SLA View -->
+        <div id="view-sla" class="view">
+          <div class="sla-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">SLA Rules</h3>
+                <span class="panel-badge">per stage</span>
+              </div>
+              <div class="panel-body" id="sla-rules-list">
+                <div class="empty-state">Loading…</div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Compliance Metrics</h3>
+                <select id="sla-period-select" class="select-input select-sm">
+                  <option value="7">Last 7 days</option>
+                  <option value="30" selected>Last 30 days</option>
+                  <option value="90">Last 90 days</option>
+                  <option value="365">Last 365 days</option>
+                </select>
+              </div>
+              <div class="panel-body" id="sla-compliance-body">
+                <div class="empty-state">Loading…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics View -->
+        <div id="view-analytics" class="view">
+          <div class="view-toolbar">
+            <div class="toolbar-left">
+              <select id="analytics-range" class="select-input">
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+                <option value="180">Last 180 days</option>
+                <option value="366">Last 366 days</option>
+              </select>
+            </div>
+          </div>
+          <div class="analytics-grid">
+            <div class="panel panel-wide">
+              <div class="panel-header"><h3 class="panel-title">Request Volume Trend</h3></div>
+              <div class="panel-body" id="trend-chart">
+                <canvas id="trend-canvas" height="180"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><h3 class="panel-title">Department Efficiency</h3></div>
+              <div class="panel-body" id="dept-efficiency-body">
+                <div class="empty-state">Loading…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Copilot View -->
+        <div id="view-ai" class="view">
+          <div class="ai-shell">
+            <div class="ai-header">
+              <div class="ai-avatar">
+                <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="22" stroke="var(--cyan)" stroke-width="2"/>
+                  <circle cx="24" cy="24" r="3" fill="var(--cyan)"/>
+                  <circle cx="24" cy="24" r="12" stroke="var(--cyan)" stroke-width="1" stroke-dasharray="2 3" opacity="0.6"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="ai-title">Operational Copilot</h3>
+                <p class="ai-subtitle">Ask anything about your operations in plain language</p>
+              </div>
+            </div>
+
+            <div id="copilot-messages" class="copilot-messages" role="log" aria-label="Copilot conversation" aria-live="polite">
+              <div class="copilot-msg copilot-msg--assistant">
+                <div class="copilot-msg-avatar">AI</div>
+                <div class="copilot-msg-body">
+                  <p>Hello! I'm your Operational Copilot. Ask me about service requests, SLA compliance, department performance, or delays.</p>
+                  <div class="copilot-suggestions">
+                    <button class="suggestion-chip" data-query="Show all delayed requests">Show all delayed requests</button>
+                    <button class="suggestion-chip" data-query="Which department causes the most delays?">Which department causes the most delays?</button>
+                    <button class="suggestion-chip" data-query="What is today's SLA compliance?">What is today's SLA compliance?</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form id="copilot-form" class="copilot-input-row">
+              <input type="text" id="copilot-input" class="copilot-input" placeholder="Ask about operations, delays, SLA compliance…" autocomplete="off" />
+              <button type="submit" class="btn btn-primary copilot-send" id="copilot-send-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div><!-- /view-container -->
+    </main>
+  </div>
+
+  <!-- Sidebar backdrop (mobile overlay) -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+
+  <!-- ── Modals ─────────────────────────────────────────────────────────────── -->
+  <div id="modal-overlay" class="modal-overlay" hidden role="dialog" aria-modal="true">
+    <div class="modal" id="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">Modal</h3>
+        <button class="btn-icon" id="modal-close" aria-label="Close modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- ── Toast notifications ────────────────────────────────────────────────── -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
+
+  <script src="/JS/app.js" type="module"></script>
+</body>
+</html>

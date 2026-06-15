@@ -1,0 +1,24 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.local
+.env.*.local
+*.log
+tsconfig.tsbuildinfo
+.turbo/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+.mypy_cache/
+
+# Next.js
+.next/
+out/
+
+# Build outputs
+packages/types/dist/

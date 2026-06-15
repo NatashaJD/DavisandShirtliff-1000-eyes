@@ -1,0 +1,99 @@
+version: "3.9"
+
+# Dayliff 1000 Eyes — Local Development Environment
+# Provides: PostgreSQL 16 + TimescaleDB + pgvector, Redis 7, ML microservice
+
+services:
+  # ---------------------------------------------------------------------------
+  # PostgreSQL 16 with TimescaleDB and pgvector extensions
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: timescale/timescaledb-ha:pg16
+    container_name: dayliff_postgres
+    environment:
+      POSTGRES_DB: dayliff_eyes
+      POSTGRES_USER: dayliff
+      POSTGRES_PASSWORD: dayliff_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/home/postgres/pgdata/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dayliff -d dayliff_eyes"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Redis 7 — Cache, Pub/Sub, BullMQ queue backend
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7.4-alpine
+    container_name: dayliff_redis
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # ML Microservice (Python FastAPI)
+  # ---------------------------------------------------------------------------
+  ml:
+    build:
+      context: ./apps/ml
+      dockerfile: Dockerfile
+    container_name: dayliff_ml
+    environment:
+      PORT: "8000"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # API Service (Node.js Fastify) — optional, can run locally with `npm run dev`
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: dayliff_api
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://dayliff:dayliff_dev@postgres:5432/dayliff_eyes
+      REDIS_URL: redis://redis:6379
+      ML_SERVICE_URL: http://ml:8000
+      PORT: "3000"
+      HOST: "0.0.0.0"
+      LOG_LEVEL: info
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ml:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles:
+      - full  # only starts when `docker compose --profile full up` is used
+
+volumes:
+  postgres_data:
+  redis_data:
